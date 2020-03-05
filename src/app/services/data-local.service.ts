@@ -11,12 +11,12 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 })
 export class DataLocalService {
   guardados: Registro[] = [];
-  dataDirectory: string = '';
+  dataDirectory = '';
   constructor(private storage: Storage,
-    private navCtrl: NavController,
-    private iab: InAppBrowser,
-    private file: File,
-    private emailComposer: EmailComposer
+              private navCtrl: NavController,
+              private iab: InAppBrowser,
+              private emailComposer: EmailComposer,
+              private file: File,
   ) {
     this.dataDirectory = this.file.dataDirectory;
 
@@ -26,7 +26,6 @@ export class DataLocalService {
     //   }
     // });
     this.cargarRegistros();
-    //cargar el storage
   }
 
   guardarRegistro(format: string, texto: string) {
@@ -61,12 +60,12 @@ export class DataLocalService {
     });
 
     console.log(arr.join(''));
+    this.crearArchivoFisico(arr.join(''));
 
-
-    let email = {
-      to: 'mestelles@litoprocess.com',      
+    const email = {
+      to: 'mestelles@litoprocess.com',
       attachments: [
-        this.dataDirectory+'registros.csv'
+        this.dataDirectory + 'registros.csv'
         // 'file://img/logo.png',
         // 'res://icon.png',
         // 'base64:icon.png//iVBORw0KGgoAAAANSUhEUg...',
@@ -75,14 +74,11 @@ export class DataLocalService {
       subject: 'Backups de Scans',
       body: 'Adjunto tienes los backups de los <stron>scans</strong> ',
       isHtml: true
-    }
-    
+    };
     // Send a text message using default options
-    this.emailComposer.open(email).then(z=>
+    this.emailComposer.open(email).then(z =>
                                     console.log('Elemento enviado'));
 
-
-    //this.crearArchivoFisico(arr.join(''));
   }
 
   async escribirArchivo(text: string) {

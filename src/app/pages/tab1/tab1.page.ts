@@ -14,7 +14,7 @@ export class Tab1Page {
      allowSlideNext: false
    };
   constructor(private barcodeScanner: BarcodeScanner,
-              private dataLocalService: DataLocalService             
+              private dataLocalService: DataLocalService
               ) { }
   // ionViewDidEnter() {
   //   console.log('La vista esta cargada');
@@ -22,10 +22,9 @@ export class Tab1Page {
   // ionViewDidLeave() {
   //   console.log('viewDidLeave');
   // }
-  // ionViewWillEnter() {
-  //   console.log('WillLoad');
-  //   //this.scanCode();
-  // }
+  ionViewWillEnter() {
+    this.scanCode();
+  }
   // ionViewWillLeave() {
   //   console.log('WillLeave');
   // }
@@ -37,12 +36,9 @@ export class Tab1Page {
         this.dataLocalService.guardarRegistro(barcodeData.format, barcodeData.text);
       }
     }).catch(err => {
-
-      
-      this.dataLocalService.guardarRegistro("Geo", "geo:20.994265,-100.140950");
-      //this.dataLocalService.guardarRegistro("Geo", "geo:40.731517,-74.06087");
-      // this.dataLocalService.guardarRegistro("url", "https://www.litoprocess.com");
-      
+      // this.dataLocalService.guardarRegistro("Geo", "geo:20.994265,-100.140950");
+      // this.dataLocalService.guardarRegistro("Geo", "geo:40.731517,-74.06087");
+      //  this.dataLocalService.guardarRegistro("url", "https://www.litoprocess.com");
     });
   }
 }
